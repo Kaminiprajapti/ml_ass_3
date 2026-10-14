@@ -1,0 +1,479 @@
+ASSIGNMENT – 3
+Machine Learning
+MCA
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Question 1. Define Supervised Learning. Explain the key difference between supervised learning and unsupervised learning with one example of each.
+
+Supervised Learning is a type of machine learning in which a model learns from a labelled dataset containing input features and their corresponding correct outputs. The model identifies patterns in the training data and uses them to predict outputs for new, unseen data.
+
+Difference between supervised and unsupervised learning:
+
+| Basis             | Supervised Learning                           | Unsupervised Learning                     |
+| ----------------- | --------------------------------------------- | ----------------------------------------- |
+| Data              | Uses labelled data                            | Uses unlabelled data                      |
+| Objective         | Predicts a known target or output             | Discovers hidden patterns or structures   |
+| Feedback          | Predictions can be compared with known labels | No predefined target labels are available |
+| Common tasks      | Classification and regression                 | Clustering and dimensionality reduction   |
+| Example algorithm | Decision Tree                                 | K-Means Clustering                        |
+
+Example of Supervised Learning: An email spam detector is trained using emails labelled as “Spam” or “Not Spam.” It learns to classify new emails.
+
+Example of Unsupervised Learning: A retail company uses K-Means Clustering to group customers according to their purchasing behaviour without predefined customer categories.
+
+Thus, supervised learning predicts target values using labelled examples, whereas unsupervised learning discovers patterns in data without target labels.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Question 2. What are the two main types of supervised learning problems? Clearly distinguish between them and give one real-world example for each type.
+
+The two main types of supervised learning problems are classification and regression.
+
+### 1. Classification
+
+Classification is used when the target variable represents a category or class label. The model predicts which class an observation belongs to.
+
+- Output: Discrete categories.
+- Examples: Spam detection, disease diagnosis and customer churn prediction.
+- Algorithms: Logistic Regression, Decision Tree, Naive Bayes and Support Vector Machine.
+
+Real-world example: A bank predicts whether a loan applicant is likely to default or not default. The output consists of two classes: Default and No Default.
+
+### 2. Regression
+
+Regression is used when the target variable is a continuous numerical value. The model estimates a quantity based on input features.
+
+- Output: Continuous numerical values.
+- Examples: House-price prediction, sales forecasting and temperature prediction.
+- Algorithms: Linear Regression, Decision Tree Regressor and Random Forest Regressor.
+
+Real-world example: A real estate company predicts a house's selling price based on its area, location, number of bedrooms and age.
+
+| Basis           | Classification              | Regression                       |
+| --------------- | --------------------------- | -------------------------------- |
+| Target variable | Categorical                 | Numerical and usually continuous |
+| Purpose         | Predicts a class            | Predicts a quantity              |
+| Example output  | Spam / Not Spam             | ₹50,00,000                       |
+| Common metric   | Accuracy, Precision, Recall | MAE, RMSE, \\(R^2\\)             |
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Question 3. Explain the concept of Linear Regression. Write the equation of a simple linear regression model and define the terms. What is the role of the residual/error term?
+
+Linear Regression is a supervised learning algorithm used to model the relationship between an independent variable and a dependent variable by fitting a straight line to observed data.
+
+The simple linear regression equation is:
+
+\\[ y = \beta_0+\beta_1x+\varepsilon \\]
+
+Where:
+
+- \\(y\\) = Dependent variable: The value we want to predict, such as house price.
+- \\(x\\) = Independent variable: The input feature used for prediction, such as house area.
+- \\(\beta_0\\) = Intercept: The predicted value of \\(y\\) when \\(x=0\\).
+- \\(\beta_1\\) = Slope: The expected change in \\(y\\) for a one-unit increase in \\(x\\).
+- \\(\varepsilon\\) = Error term: The part of the observed outcome not explained by the linear model.
+
+The prediction made by the fitted model is commonly written as:
+
+\\[ \hat{y}=b_0+b_1x \\]
+
+Here, \\(\hat y\\) is the predicted value, while \\(b_0\\) and \\(b_1\\) are the estimated intercept and slope.
+
+### Role of the residual/error term
+
+For an observed value \\(y_i\\), the residual is:
+
+\\[ e_i=y_i-\hat{y}\_i \\]
+
+It measures the difference between the actual and predicted values. Residuals help assess how well the model fits the data. Ordinary Least Squares estimates the regression coefficients by minimizing the sum of squared residuals:
+
+\\[ SSE=\sum\_{i=1}^{n}(y_i-\hat{y}\_i)^2 \\]
+
+Example: Suppose the fitted model for house price is:
+
+\\[ \hat y=10+2x \\]
+
+If \\(x=5\\), then:
+
+\\[ \hat y=10+2(5)=20 \\]
+
+If the actual value is 22, the residual is \\(22-20=2\\).
+
+Therefore, linear regression is useful for predicting numerical values and understanding how input variables relate to an outcome.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Question 4. How does Logistic Regression differ from Linear Regression? Write the logistic (sigmoid) function and explain why it is suitable for binary classification. What is the decision boundary?
+
+Linear Regression predicts continuous numerical values, whereas Logistic Regression estimates the probability that an observation belongs to a particular class. Despite its name, Logistic Regression is primarily used for classification.
+
+### Logistic (sigmoid) function
+
+The sigmoid function is:
+
+\\[ \sigma(z)=\frac{1}{1+e^{-z}} \\]
+
+For binary classification, the model can be expressed as:
+
+\\[ P(y=1\mid x)= \frac{1}{1+e^{-(\beta_0+\beta_1x)}} \\]
+
+For multiple input features, the linear expression in the exponent includes the corresponding weighted features.
+
+The sigmoid function maps any real-valued input to a value between 0 and 1. This allows the output to be interpreted as the estimated probability of the positive class.
+
+### Why is it suitable for binary classification?
+
+A threshold is used to convert the predicted probability into a class. A common default threshold is 0.5:
+
+- If \\(P(y=1\mid x)\geq 0.5\\), predict class 1.
+- If \\(P(y=1\mid x)<0.5\\), predict class 0.
+
+The threshold can be adjusted depending on the cost of false positives and false negatives.
+
+### Decision boundary
+
+The decision boundary is the point or surface that separates the predicted classes. With the default threshold of 0.5, the boundary occurs when:
+
+\\[ \beta_0+\beta_1x=0 \\]
+
+For multiple features:
+
+\\[ \beta_0+\sum\_{j=1}^{p}\beta_jx_j=0 \\]
+
+This is a linear boundary in the original feature space for standard Logistic Regression.
+
+| Linear Regression                | Logistic Regression                               |
+| -------------------------------- | ------------------------------------------------- |
+| Predicts continuous values       | Predicts class probabilities                      |
+| Output can be any real number    | Probability lies between 0 and 1                  |
+| Commonly uses squared-error loss | Commonly uses log loss                            |
+| Example: Predicting salary       | Example: Predicting whether a customer will churn |
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Question 5. Describe how a Decision Tree works for classification. Explain Information Gain and Gini Impurity. Why can decision trees overfit, and how can this problem be reduced?
+
+A Decision Tree is a supervised learning algorithm that makes predictions through a sequence of decisions. It represents the decision process as a tree containing a root node, internal decision nodes, branches and leaf nodes.
+
+### Working of a Decision Tree
+
+1. The algorithm starts with the complete training dataset.
+2. It selects a feature and a split that separates the classes effectively.
+3. The data is divided into smaller subsets based on the selected condition.
+4. The splitting process continues recursively.
+5. A leaf node assigns a class, often based on the majority class of the samples reaching that leaf.
+
+Example: A bank may classify a loan application as low risk or high risk using features such as income, credit score and existing debt.
+
+### 1. Information Gain
+
+Information Gain measures how much a split reduces the uncertainty or entropy of the target classes.
+
+Entropy is defined as:
+
+\\[ H(S)=-\sum\_{i=1}^{k}p_i\log_2p_i \\]
+
+Where \\(p_i\\) is the proportion of examples belonging to class \\(i\\).
+
+Information Gain is:
+
+\\[ IG=H(S)-\sum\_{j=1}^{m} \frac{|S_j|}{|S|}H(S_j) \\]
+
+Here, \\(S_j\\) represents a subset produced by the split. A split with greater Information Gain generally reduces uncertainty more effectively.
+
+### 2. Gini Impurity
+
+Gini Impurity measures the likelihood of incorrectly classifying a randomly selected example if its class were assigned according to the class distribution in the node.
+
+\\[ Gini(S)=1-\sum\_{i=1}^{k}p_i^2 \\]
+
+A lower Gini value indicates a purer node. Decision trees such as CART commonly choose splits that reduce weighted Gini impurity.
+
+### Why do decision trees overfit?
+
+A tree can grow very deep and learn noise, unusual observations or tiny patterns specific to the training data. Such a tree may perform well on training data but poorly on unseen data.
+
+### Methods to reduce overfitting
+
+- Pruning: Remove branches that contribute little to predictive performance.
+- Maximum depth: Limit the depth of the tree.
+- Minimum samples per leaf: Require a minimum number of observations in each leaf.
+- Cross-validation: Select suitable model settings using separate validation folds.
+- Ensemble methods: Use methods such as Random Forest to combine predictions from multiple trees.
+
+Thus, decision trees are easy to interpret, but controlling their complexity is important for good generalization.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Question 6. What are Ensemble Methods? Differentiate between Bagging and Boosting with examples. Why do ensemble methods generally perform better than a single model?
+
+Ensemble Methods are machine learning techniques that combine the predictions of multiple models to produce a final prediction. Their purpose is to improve accuracy, stability or generalization compared with relying on a single model.
+
+### 1. Bagging (Bootstrap Aggregating)
+
+Bagging trains multiple models independently on different bootstrap samples of the training dataset. Their predictions are then combined.
+
+- Models can be trained in parallel.
+- It primarily reduces variance for unstable learners.
+- For classification, predictions are commonly combined through majority voting.
+- For regression, predictions are commonly averaged.
+
+Example: Random Forest trains many decision trees on bootstrap samples and combines their predictions. It also uses random subsets of features when selecting splits.
+
+### 2. Boosting
+
+Boosting trains models sequentially, with each new model focusing on correcting errors or improving the predictions of the existing ensemble.
+
+- Models are built one after another.
+- It can reduce bias and improve predictive accuracy.
+- The final prediction is a weighted combination of the individual models.
+
+Examples: AdaBoost, Gradient Boosting and XGBoost.
+
+| Basis             | Bagging                      | Boosting                                         |
+| ----------------- | ---------------------------- | ------------------------------------------------ |
+| Training          | Models trained independently | Models trained sequentially                      |
+| Main goal         | Often reduces variance       | Often reduces bias and improves fit              |
+| Data handling     | Uses bootstrap samples       | Focuses on errors or residuals of earlier models |
+| Combining results | Voting or averaging          | Weighted or additive combination                 |
+| Examples          | Random Forest, Bagged Trees  | AdaBoost, Gradient Boosting, XGBoost             |
+
+### Why do ensemble methods perform better?
+
+1. Error reduction: Different models may make different errors, so combining them can improve predictions.
+2. Better stability: Bagging can reduce the impact of changes in the training data.
+3. Improved accuracy: Boosting can progressively improve a weak learner's predictions.
+4. Better generalization: A well-designed ensemble may perform better on unseen data.
+
+However, ensembles do not always outperform a single model. Their success depends on data quality, model diversity, tuning and the risk of overfitting.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Question 7. Explain the working principle of Support Vector Machines (SVM) for binary classification. What are support vectors and the margin? Briefly describe the role of the kernel trick.
+
+A Support Vector Machine (SVM) is a supervised learning algorithm used for classification. It finds a separating decision boundary, called a hyperplane, that maximizes the margin between two classes.
+
+### Working principle
+
+For a linear SVM, the decision boundary is:
+
+\\[ w^Tx+b=0 \\]
+
+Where:
+
+- \\(w\\) = Weight vector.
+- \\(x\\) = Input feature vector.
+- \\(b\\) = Bias term.
+
+The predicted class depends on which side of the hyperplane the observation lies.
+
+SVM aims to find a boundary with the largest possible margin while correctly classifying the training data in the hard-margin case. Soft-margin SVM allows some violations to handle overlapping classes and noisy data.
+
+### Support vectors
+
+Support vectors are the training observations closest to the decision boundary. They are particularly important because they determine the position of the maximum-margin hyperplane.
+
+### Margin
+
+The margin is the distance between the decision boundary and the nearest observations from the classes.
+
+For a standard linear SVM with canonical scaling, the margin width is:
+
+\\[ \text{Margin width}=\frac{2}{\\|w\\|} \\]
+
+Maximizing this margin generally helps the classifier generalize to unseen data.
+
+### Kernel trick
+
+Some datasets cannot be separated effectively by a straight line or hyperplane in their original feature space. The kernel trick allows an SVM to model nonlinear decision boundaries by computing similarity values as if the data were mapped to a higher-dimensional feature space, without explicitly calculating that mapping.
+
+Common kernels include:
+
+- Linear kernel
+- Polynomial kernel
+- Radial Basis Function (RBF) kernel
+
+Example: An SVM with an RBF kernel can classify data arranged in circular or other nonlinear patterns.
+
+Therefore, SVM is effective for binary classification, particularly when a useful separating margin can be found.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Question 8. List and briefly explain any four evaluation metrics used for classification. When is Accuracy not a good metric, and which metric would you prefer instead?
+
+Classification metrics measure how well a model predicts class labels. Many are calculated using the confusion matrix.
+
+For a binary classifier:
+
+- True Positive (TP): Positive example correctly predicted as positive.
+- True Negative (TN): Negative example correctly predicted as negative.
+- False Positive (FP): Negative example incorrectly predicted as positive.
+- False Negative (FN): Positive example incorrectly predicted as negative.
+
+### Four classification metrics
+
+1\. Accuracy
+
+Accuracy measures the proportion of all predictions that are correct.
+
+\\[ Accuracy=\frac{TP+TN}{TP+TN+FP+FN} \\]
+
+It is useful when classes are reasonably balanced and the costs of different errors are similar.
+
+2\. Precision
+
+Precision measures how many predicted positive cases are actually positive.
+
+\\[ Precision=\frac{TP}{TP+FP} \\]
+
+It is important when false positives are costly, such as when unnecessary fraud investigations consume substantial resources.
+
+3\. Recall (Sensitivity)
+
+Recall measures how many actual positive cases are correctly identified.
+
+\\[ Recall=\frac{TP}{TP+FN} \\]
+
+It is important when missing a positive case is costly, such as failing to identify a serious disease.
+
+4\. F1-Score
+
+F1-Score is the harmonic mean of precision and recall.
+
+\\[ F1=2\times\frac{Precision\times Recall} {Precision+Recall} \\]
+
+It is useful when both false positives and false negatives matter, particularly with imbalanced classes.
+
+Another useful metric is ROC-AUC, which measures how well a model ranks positive cases above negative cases across classification thresholds.
+
+### When is Accuracy not a good metric?
+
+Accuracy can be misleading when the dataset is imbalanced.
+
+Example: Suppose a dataset contains 1,000 transactions, of which 990 are legitimate and 10 are fraudulent. A model that predicts every transaction as legitimate achieves:
+
+\\[ Accuracy=\frac{990}{1000}\times100=99\\% \\]
+
+However, it detects none of the fraudulent transactions.
+
+In this case, I would prefer Recall when detecting as many fraudulent transactions as possible is the main priority. If false alarms must also be controlled, I would use Precision and Recall together, or the F1-Score. The best metric depends on the real-world cost of each type of error.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Question 9. For regression problems, explain MSE, RMSE, MAE and R-squared. Which metric is more sensitive to outliers and why?
+
+Regression evaluation metrics measure the difference between actual values and model predictions.
+
+Let \\(y_i\\) be the actual value, \\(\hat y_i\\) be the predicted value and \\(n\\) be the number of observations.
+
+### (a) Mean Squared Error (MSE)
+
+MSE is the average of the squared prediction errors.
+
+\\[ MSE=\frac{1}{n}\sum\_{i=1}^{n} (y_i-\hat y_i)^2 \\]
+
+- Lower MSE indicates smaller squared errors.
+- Squaring makes large errors contribute disproportionately.
+- Its units are the square of the target variable's units.
+
+### (b) Root Mean Squared Error (RMSE)
+
+RMSE is the square root of MSE.
+
+\\[ RMSE=\sqrt{\frac{1}{n} \sum\_{i=1}^{n}(y_i-\hat y_i)^2} \\]
+
+- It penalizes large errors more strongly than MAE.
+- It is expressed in the same units as the target variable.
+- A lower RMSE generally indicates better predictions.
+
+### (c) Mean Absolute Error (MAE)
+
+MAE is the average absolute difference between actual and predicted values.
+
+\\[ MAE=\frac{1}{n}\sum\_{i=1}^{n} |y_i-\hat y_i| \\]
+
+- It is easy to interpret.
+- It measures the average magnitude of prediction errors.
+- It is less sensitive to extreme errors than MSE or RMSE.
+
+### (d) R-squared (Coefficient of Determination)
+
+R-squared measures how much of the variation in the target variable is explained by the model relative to predicting the target's mean.
+
+\\[ R^2=1- \frac{\sum\_{i=1}^{n}(y_i-\hat y_i)^2} {\sum\_{i=1}^{n}(y_i-\bar y)^2} \\]
+
+Where \\(\bar y\\) is the mean of the actual target values.
+
+- \\(R^2=1\\): Perfect predictions.
+- \\(R^2=0\\): The model performs as well as predicting the sample mean, under the standard evaluation setup.
+- \\(R^2<0\\): The model performs worse than that mean-prediction baseline on the evaluated data.
+
+R-squared should be interpreted with care, especially when comparing models evaluated on different datasets.
+
+### Which metric is more sensitive to outliers?
+
+MSE and RMSE are more sensitive to outliers than MAE because they square the errors before averaging. A large error therefore has a disproportionately large effect on the metric.
+
+For example, an error of 10 contributes \\(100\\) to the squared-error sum, whereas an error of 2 contributes only \\(4\\).
+
+| Metric    | Main characteristic                                                                                      |
+| --------- | -------------------------------------------------------------------------------------------------------- |
+| MSE       | Penalizes large errors through squaring                                                                  |
+| RMSE      | Same squared-error sensitivity, in the target's units                                                    |
+| MAE       | Less sensitive to outliers                                                                               |
+| R-squared | Measures performance relative to variation around the mean; can also be affected by extreme observations |
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Question 10. Discuss any four real-world applications of Supervised Learning. For each application, mention the problem type and a suitable algorithm.
+
+Supervised learning is widely used in industries because it learns from historical examples with known outcomes. Four important applications are:
+
+### 1. Healthcare — Disease Diagnosis
+
+Supervised learning can use labelled patient records, symptoms, test results and medical images to predict whether a patient has a disease.
+
+- Problem type: Classification.
+- Suitable algorithm: Logistic Regression, Decision Tree or Support Vector Machine.
+- Example: Predicting whether a patient is likely to have diabetes based on medical measurements.
+
+A model can support clinical decision-making, but its predictions should be validated and used with appropriate medical oversight.
+
+### 2. Banking and Finance — Fraud Detection
+
+Banks use transaction details, spending patterns and historical fraud labels to identify suspicious transactions.
+
+- Problem type: Classification.
+- Suitable algorithm: Random Forest, Logistic Regression or Gradient Boosting.
+- Example: Classifying a credit-card transaction as fraudulent or legitimate.
+
+The model can help flag suspicious activity for further investigation.
+
+### 3. Real Estate — House-Price Prediction
+
+Real estate companies use historical property sales and features such as location, floor area, number of bedrooms and property age to estimate selling prices.
+
+- Problem type: Regression.
+- Suitable algorithm: Linear Regression, Random Forest Regressor or Gradient Boosting Regressor.
+- Example: Estimating the market price of a house from its size and location.
+
+The predicted value can support price estimation and property comparisons.
+
+### 4. E-commerce — Customer Churn Prediction
+
+Online businesses use customer activity, purchase history, complaints and subscription information to predict whether customers will stop using their services.
+
+- Problem type: Classification.
+- Suitable algorithm: Logistic Regression, Decision Tree or Random Forest.
+- Example: Predicting whether a subscriber is likely to cancel a subscription.
+
+The business can use the predictions to identify at-risk customers and plan suitable retention activities.
+
+| Application               | Problem type   | Suitable algorithm  |
+| ------------------------- | -------------- | ------------------- |
+| Disease diagnosis         | Classification | Logistic Regression |
+| Fraud detection           | Classification | Random Forest       |
+| House-price prediction    | Regression     | Linear Regression   |
+| Customer churn prediction | Classification | Gradient Boosting   |
